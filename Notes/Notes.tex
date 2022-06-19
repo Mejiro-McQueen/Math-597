@@ -1,0 +1,279 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{amsthm}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+
+\newtheorem{note}{Note}[section]
+
+
+\begin{document}
+	\begin{lem}
+		\[\prod_{i=1}(1-x_i)=1+\sum_{R\subset Q}(-1)^{|R|}\prod_{x\in R}x\] where $Q=\mathcal{P}(x_1, x_2, \mathellipsis)$ 
+	\end{lem}
+	\begin{proof}
+		Applying the distributive property on $\prod_{i=1}(1-x_i)$ two terms at a time will reveal a pattern we can use for the next step.\newline 
+		\begin{align}
+			\prod_{i=1}(1-x_i)&= (1-x_1)(1-x_2)\prod_{i=3}(1-x_i)\\
+			&=1-(x_1+x_2)+(x_1x_2)\prod_{i=3}(1-x_1)\\
+			&=(1-(x_1+x_2)+(x_1x_2))(1-x_3)\prod_{i=4}(1-x_i)\\
+			&=1-(x_1+x_2+x_3)+(x_1x_2+x_1x_3+x_2x_3)-(x_1x_2x_3)\prod_{i=4}(1-x_i) \label{partial_prod}
+		\end{align}
+	Then line \ref{partial_prod} can be expressed as \[\prod_{i=1}(1-x_i) = 1+(-1)\sum_{0<i}x_i+\sum_{0<i<j}x_ix_j+(-1)\sum_{0<i<j<k}x_ix_jx_k+\mathellipsis\]
+	
+	Now let $Q$ be the power set of our variables $x_1,x_2,\mathellipsis$, which is as follows:\newline $Q=\{\{x_1\},\{x_2\},\{x_3\},\{x_1,x_2\},\{x_1,x_3\},\{x_2,x_3\},\mathellipsis\}$
+	
+	Finally, we can express our previous sum as described in the lemma: 
+	\[\prod_{i=1}(1-x_i)=1+\sum_{R\subset Q}(-1)^{|R|}\prod_{x\in R}x\]   
+	\end{proof}
+
+	\begin{defn}
+		The Riemann Zeta functions is defined by \[\zeta(s)=\sum_{j=1}\frac{1}{j^s}=\prod_{p \text{ prime}}(1-p^{-s})^{-1}\]. 
+	\end{defn}	
+	
+	\begin{defn}
+		The Mobius function is given by:
+		$\mu(n)=\begin{cases} 
+			1 & \text{if } n=\pm 1 \\
+			0 & \text{if } n \text{ is not square free} \\
+			(-1)^r & \text{if } n=p_1p_2\mathellipsis p_r
+		\end{cases}
+		$
+		
+	\end{defn}
+	\begin{lem}
+		$\sum_{j=1}\frac{\mu(j)}{j^s}=\prod(1-p^{-s})=\frac{1}{\zeta(s)}$
+	\end{lem}
+	\begin{proof}
+		We can apply the previous lemma to show a relationship between the Mobius function and the inverse Riemann Zeta function.
+		
+		Applying the lemma, $\prod(1-p^{-s})=1+\sum_{R\subset Q}(-1)^{|R|}\prod_{x\in R}x$ where $R=\mathcal{P}(p_1,p_2,\mathellipsis,p_k)$
+		\newline 
+		\newline
+		
+		For any term, we have $R=\{p_1,p_2,\mathellipsis, p_r\}$. Then $(-1)^{|R|} = 1$ whenever $r$ is even, and $-1$ whenever $r$ is odd.
+		Notice that these two cases coincide exactly with the last case of the Mobius function.			
+		Thus, we can replace the sign of the term with $\mu(j)$ where $j=\prod_{x\in R}x=p_1p_2\mathellipsis p_r$ and we can replace the product of the term, which is given by $(p_1p_2\mathellipsis p_r)^{-s}$, with $\frac{1}{j^{s}}$. 
+		
+		Showing the lemma.
+	\end{proof}
+
+\begin{defn}[Floor]
+	$\lfloor x \rfloor = n$ if and only if $n\leq x < n+1$
+\end{defn}
+
+\begin{lem}(Floor Annihilators)
+	Given a positive rational $\frac{a}{b}$, $\lfloor \frac{a}{b}\rfloor = 0 $ if and only if $a<b$. 
+\end{lem}
+\begin{proof}
+	Suppose $\lfloor \frac{a}{b} \rfloor = 0$. Then $n=0$ and from the definition of floor, $0\leq \frac{a}{b} < 0+1$. Then solving for $a$, $0\leq a < b$.
+	
+	Next, suppose $a<b$, then working in reverse, $\frac{a}{b}<1$  and so $0\leq \frac{a}{b} < 1$, which implies $\lfloor \frac{a}{b} \rfloor = 0$. 
+\end{proof}
+
+\begin{lem}
+	Given a positive rational $\frac{n}{j^r}$, $\lfloor\frac{n}{j^r}\rfloor = 0 $ whenever $j>\lfloor \sqrt[r]{n}\rfloor$
+\end{lem}
+\begin{proof}
+	Applying the previous lemma, $n<j^r$ and solving for $j$, $\sqrt[r]{n}<j$. We need $j$ to be an integer, so, $\lfloor\sqrt[r]{n}\rfloor\leq \sqrt[r]{n} < j$.
+\end{proof}
+
+\begin{defn}
+	Given a fixed integer $r\geq 1$, the integers $m_1,m_2,\mathellipsis,m_k$ are relatively $r$-prime if and only if they have no common factor of the form $n^r$ for $n>1$. 
+\end{defn}
+\begin{lem}
+	An ordered $k$-tuple of integers are relatively $r$-prime if and only if there exists no prime $p$ such that $p^r$ divides each $k$ integer. 
+\end{lem}
+\begin{proof}
+	Suppose $M=(m_1,m_2,\mathellipsis,m_k)$ is a $k$-tuple that is relatively $r$-prime. Then for a fixed $r$, and any integer $n$, we have $n^r\nmid m_i$ for any $m_i\in M$. Next, $n$ is an integer and has a prime factorization, $p_1^{\alpha_1}p_2^{\alpha_2}p_3^{\alpha_3}\mathellipsis p_n^{\alpha_n}$. Thus, $n^r=(p_1^{\alpha_1})^r(p_2^{\alpha_2})^r(p_3^{\alpha_3})^r\nmid m_i$ for all $m_i\in M$. 
+	
+	Suppose there exists no prime $p$ such that $p^r$ divides each $k$ integer in a $k$-tuple called $M$. By prime factorization, we can construct any arbitrary integer $n$. Then, $(p_1^{\alpha_1})^r(p_2^{\alpha_2})^r(p_3^{\alpha_3})^r=(p_1^{\alpha_1}p_2^{\alpha_2}p_3^{\alpha_3})^r=n^r\nmid m_i$ for all $m_i\in M$.
+\end{proof}
+
+\begin{lem}
+	$A^k-B^k=(A-B)(A^{k-1}+A^{k-1}B+A^{k-1}B^2\mathellipsis+B^{k-1})$
+\end{lem}
+\begin{proof}
+	Applying the distributive property will show that only the first and last terms do not cancel.
+\end{proof}
+
+\begin{note}
+	How many unique ordered $k$-tuples from elements in $S$ be made? 
+	
+	Using the fundamental counting principal: We have $|S|$ choices for each of the $k$ tuple elements, for a total of $|S|^k$ tuples. 
+	
+	How many ordered $k$-tuples can we make of positive integers less than or equal to $n$?
+	
+	$S=\{1,2,3,\mathellipsis,n\}$ implies $n^k$.
+\end{note}
+
+\begin{note}
+	Recall Kolmogrov Probability Axioms:
+	\begin{enumerate}
+		\item $P(A)\geq 0$\\
+		\item $P(A_1\cup A_2 \cup \mathellipsis)=P(A_1)+P(A_2)+\mathellipsis$ where $A_i$ are disjoint events.\\
+		\item $P(S)=1$
+	\end{enumerate}
+\end{note}
+
+\begin{note}
+	How many positive integers less than $n$ are divisible by $m$? 
+	
+	First, we will observe the following pattern and build upon it: 
+	Suppose $n=100$ and $m=25$.
+	Then $S=\{25,50,75,100\}$ are all divisible by $m$ and less than or equal to $n$. Also, $\frac{n}{m}=\frac{100}{25} = 4 = |S|$.
+	
+	However,
+	Suppose $n=101$ and $m=25$.
+	Then $S=\{25,50,75,100\}$ are all divisible by $m$ and less than or equal to $n$. Also, $\frac{n}{m}=\frac{101}{25} = 4.04.$
+	
+	The pattern does not hold unless we truncate the fractional part, which we can do by applying the floor function. 
+	
+	Let's start over with the inclusion of the floor function in order to find a more consistent pattern.
+	Suppose $n=100$ and $m=25$.
+	Then $S=\{25,50,75,100\}$ are all divisible by $m$ and less than or equal to $n$. Also, $\lfloor\frac{n}{m}\rfloor=\lfloor\frac{100}{25}\rfloor = \lfloor 4 \rfloor = 4 = |S|$.
+	
+	Suppose $n=101$ and $m=25$.
+	Then $S=\{25,50,75,100\}$ are all divisible by $m$ and less than or equal to $n$. Also, $\lfloor\frac{n}{m}\rfloor=\lfloor\frac{101}{25}\rfloor = \lfloor 4.03 \rfloor = 4 = |S|$.
+	
+	Alternatively, and purely for demonstrative purposes, suppose we want to count the number of positive integers less than $n=162$ that are divisible by $m=25$. Construct the infinite arithemtic sequence $S=\{25,50,75,100,125,150,175,\mathellipsis\}$. Clearly, all elements divisible by $25$ are contained in $S$, we now need to filter elements that we are not interested in, $S^\prime=\{25,50,75,100,125,150\}$ with $|S|=6$. However, this has the same meaning as $m=25$ divides $n=162$ evenly $|S|=6$ times (repeated addition is multiplication and the inverse of multiplication is division).
+	
+	As a final note that will be useful later on, if $m<n$ then we have $\lfloor \frac{m}{n} \rfloor = 0 $ since $\frac{m}{n}<1$.
+\end{note}
+
+\begin{defn}
+	Let $q(n)$ be the number of ordered $k$-tuples less than $n$ that are relatively $r$-prime.
+\end{defn}
+
+\begin{note}
+	Inclusion Exclusion Principle
+	
+	We can use the inclusion exclusion principle to develop a more concrete idea of the actual value of $q(n)$ that we can later expand on. 
+	
+	We won't be dealing with sets directly, but instead be using their cardinality. 
+	
+	Fix $n\in \mathbb{N}$.
+	
+	Let $a=n^k$ be the cardinality of the set of all $k$-tuples of elements less than $n$, that is, the cardinality of our universal set. 
+	
+	Then let $b$ be the cardinality of the set of all $k$-tuples of elements less than $n$ that are not $r$-prime. 
+	
+	How to find such a thing?
+	If a number is not $r$-prime, then it is divisible by $p^r$ for all primes $p$. 
+	
+	How many positive integers are less than $n$ and divisible by $p^r$? By a previous result: $\lfloor \frac{n}{P^r}\rfloor$. 
+	
+	If an ordered $k$-tuple is not $r$-prime, then at least one of the tuple elements must be divisible by $p^r$. 
+	
+	Similar to a previous result, we then have $k$ elements to choose in our ordered $k$-tuple with $\lfloor \frac{n}{p^r}\rfloor$ elements to choose from. Thus we have $\lfloor \frac{n}{p^r}\rfloor^k$ ordered $k$-tuples that are not $r$-prime. 
+	
+	Up to this point, our prime $p$ has been fixed. Now, we must index our result across all primes and count the results.
+	
+	Thus we have the expression $\sum_{p_{1}^r}\lfloor \frac{n}{p_{1}^r}\rfloor^k$
+	
+	Notice that since $n$ is fixed, at some point $n<p_i$, and the sum will converge to 0 forever. 
+	
+	For the remaining terms we can continue the pattern required by the inclusion exclusion principle, for example, the next term $c$ would add the cardinality of the set of all ordered $k$-tuples with elements less than $n$ that are not $r$-prime, this time indexing over the product of the primes from the previous terms as well. 
+	
+	This satisfies the intersection of sets required by the inclusion exclusion principle.
+	
+	Thus, by the inclusion exclusion principle:
+	
+	$q(n) = n^k-\sum_{p^1}\lfloor \frac{n}{p_1^r}\rfloor^k + \sum_{(p_1 < p_2)}\lfloor \frac{n}{(p_1 p_2)^r}\rfloor^k - \sum_{(p_1 < p_2 < p_3)}\lfloor \frac{n}{(p_1 p_2 p_3)^r}\rfloor^k +\mathellipsis$ 
+\end{note}
+
+\begin{note}
+	We can perform the multiple estimate substitutions on $q(n)$ to yield $\frac{1}{\zeta(rk)}$.\newline
+	
+	Given \[q(n)=\sum_{j=1}^\infty = \mu(j)\Bigl\lfloor \frac{n}{j^r} \Bigr\rfloor^k\] we want to find an estimate that does not contain the floor function. 
+	
+	Using the definition of floor, we find the relationship $0\leq x - \lfloor x \rfloor < 1$.
+	This suggests that $x$ and $\lfloor x \rfloor$ are relatively close enough that we can perform a substitution if we account for a growth estimate. 
+	
+	Then using a previous result, 
+	\begin{align*}
+		\Bigl\lfloor \frac{n}{j^r}\Bigr\rfloor^k -\left(\frac{n}{j^r}\right)^k =\left(\Bigl\lfloor \frac{n}{j^r}\Bigr\rfloor^k- \left(\frac{n}{j^r}\right)^k\right)\left(\Bigl\lfloor\frac{n}{j^r}\Bigr\rfloor^{k-1}+\Bigl\lfloor\frac{n}{j^r}\Bigr\rfloor^{k-2}\left(\frac{n}{j^r}\right)+\mathellipsis+\left(\frac{n}{j^r}\right)^{k-1}\right)
+	\end{align*}
+	Now to find the growth estimate.
+		\begin{align*}
+		O\left(\Bigl\lfloor \frac{n}{j^r}\Bigr\rfloor^k -\left(\frac{n}{j^r}\right)^k \right)=O\left(\Bigl\lfloor \frac{n}{j^r}\Bigr\rfloor^k- \left(\frac{n}{j^r}\right)^k\right)O\left(\Bigl\lfloor\frac{n}{j^r}\Bigr\rfloor^{k-1}+\Bigl\lfloor\frac{n}{j^r}\Bigr\rfloor^{k-2}\left(\frac{n}{j^r}\right)+\mathellipsis+\left(\frac{n}{j^r}\right)^{k-1}\right)
+	\end{align*}
+	As stated earlier, the first product $\left(\Bigl\lfloor \frac{n}{j^r}\Bigr\rfloor^k- \left(\frac{n}{j^r}\right)^k\right)$, this term is at most 1, so it can be treated as a constant. For the right most product, $\lfloor x \rfloor^mx^n\leq x^{m+n}$, and so the fastest growing term is  $\left(\frac{n}{j^r}\right)^{k-1}$. Thus  $\Bigl\lfloor \frac{n}{j^r}\Bigr\rfloor^k -\left(\frac{n}{j^r}\right)^k=O\left(\left(\frac{n}{j^r}\right)^{k-1}\right)$. 
+	
+	\begin{align}
+	 q(n)&=\sum_{j=1}^{\lfloor\sqrt[r]{n}\rfloor}\mu(j)\left(\frac{n}{j^r}\right)^k+\sum_{j=1}^{\lfloor\sqrt[r]{n}\rfloor}\mu(j)O\left(\left(\frac{n}{j^r}\right)^{k-1}\right)\\
+	 &=\sum_{j=1}^{\lfloor\sqrt[r]{n}\rfloor}\mu(j)\left(\frac{n}{j^r}\right)^k+O\left(\sum_{j=1}^{\lfloor\sqrt[r]{n}\rfloor}\mu(j)\left(\frac{n}{j^r}\right)^{k-1}\right)  \label{two_estimates}
+	\end{align}
+	
+	We can now find an estimate for the new estimate that was induced by our first estimate. 
+	
+	\begin{align}
+	O\left(\sum_{j=1}^{\lfloor\sqrt[r]{n}\rfloor}\mu(j)\left(\frac{n}{j^r}\right)^{k-1}\right) &= 
+	O\left(n^{k-1}\sum_{j=1}^{\lfloor\sqrt[r]{n}\rfloor}\mu(j)\left(\frac{1}{j^{r(k-1)}}\right)\right)\\
+	&= 
+	O\left(n^{k-1}\right)O\left(\sum_{j=1}^{\lfloor\sqrt[r]{n}\rfloor}\mu(j)\left(\frac{1}{j^{r(k-1)}}\right)\right)\\
+	&=O\left(n^{k-1}\right)O\left(\sum_{j=1}^{\lfloor\sqrt[r]{n}\rfloor}\mu(j)\right)O\left(\sum_{j=1}^{\lfloor\sqrt[r]{n}\rfloor}\left(\frac{1}{j^{r(k-1)}}\right)\right)\\
+	&=O\left(n^{k-1}\right)O\left(\sum_{j=1}^{\lfloor\sqrt[r]{n}\rfloor}\left(\frac{1}{j^{r(k-1)}}\right)\right) \label{estimate_second}
+	\end{align}
+
+	Focusing on the rightmost estimate, and applying the Riemann integral,
+	\begin{align}
+		O\left(\sum_{j=1}^{\lfloor\sqrt[r]{n}\rfloor}\left(\frac{1}{j^{r(k-1)}}\right)\right)&\leq O\left(1+\int_{1}^{\sqrt[r]{n}}\frac{dx}{x^{r(k-1)}}\right) \\
+		&= \begin{cases}
+			O(\ln n) \text{ if r=1 and k=2}\\
+			O(n^{\frac{1}{r}}) \text{ if } r\leq 2 \text{ and } k=1\\
+			O(1) \text{ otherwise}
+		\end{cases}
+	\end{align} 
+	Then substituting this estimate into line \ref{estimate_second}, 
+	
+	\begin{align}
+	O\left(n^{k-1}\right)O\left(\sum_{j=1}^{\lfloor\sqrt[r]{n}\rfloor}\left(\frac{1}{j^{r(k-1)}}\right)\right)&=O(n^{k-1})\cdot\begin{cases}
+		O(\ln n) \text{ if r=1 and k=2}\\
+		O(n^{\frac{1}{r}}) \text{ if } r\leq 2 \text{ and } k=1\\
+		O(1) \text{ otherwise}
+	\end{cases}\\
+	&=\begin{cases}
+	O(n\ln n) \text{ if r=1 and k=2}\\
+	O(n^{\frac{1}{r}}) \text{ if } r\leq 2 \text{ and } k=1\\
+	O(n^{k-1}) \text{ otherwise}
+\end{cases}
+	\end{align}
+	Now we want to find and estimate to the left most sum on line \ref{two_estimates}. By applying a previous lemma,
+	\begin{align}		
+		\sum_{j=1}^{\lfloor\sqrt[r]{n}\rfloor}\mu(j)\left(\frac{n}{j^r}\right)^k &= \frac{n^k}{\zeta(rk)} - n^k\sum_{\sqrt[r]{n}+1}^\infty \frac{\mu(j)}{j^{rk}}
+	\end{align}
+	Now we can estimate the rightmost sum by applying a Riemann integral. 
+	\begin{align}
+		O\left(n^k\sum_{\sqrt[r]{n}+1}^\infty \frac{\mu(j)}{j^{rk}}\right) &= O(n^k)O\left(\sum_{\sqrt[r]{n}+1}^\infty \frac{\mu(j)}{j^{rk}}\right)\\
+		&\leq O(n^k)O\left(\int_{\sqrt[r]{n}}^{\infty}\frac{\mu(j)}{j^{rk}}\right)\\
+		&=O(n^k)O\left(n^{{1}/(r-k)}\right)\\
+		&=O\left(n^{{1}/r}\right)
+	\end{align} 
+
+	Putting all the estimates together, 
+	\begin{align}
+		q(n) &= \frac{n^k}{\zeta(rk)}+O\left(n^{{1}/r}\right)+ \begin{cases}
+			O(n\ln n) \text{ if r=1 and k=2}\\
+			O(n^{\frac{1}{r}}) \text{ if } r\leq 2 \text{ and } k=1\\
+			O(n^{k-1}) \text{ otherwise}\end{cases}\\
+		&= \frac{n^k}{\zeta(rk)}+ \begin{cases}
+			O(n\ln n) \text{ if r=1 and k=2}\\
+			O(n^{\frac{1}{r}}) \text{ if } r\leq 2 \text{ and } k=1\\
+			O(n^{k-1}) \text{ otherwise}\end{cases}
+	\end{align}
+	Finally, $\lim\limits_{n\to\infty} n^k = \infty$ and $\lim\limits_{n\to\infty} q(n)=\infty$, and so we can apply L`Hoptial's rule:
+	
+	\begin{align*}
+		\lim\limits_{n\to\infty} \frac{q(n)}{n^k} = \frac{1}{\zeta(rk)}
+	\end{align*}
+\end{note}
+\end{document}
