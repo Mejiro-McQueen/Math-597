@@ -6,6 +6,7 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{amsthm}
+\usepackage{hyperref}
 
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{lem}[thm]{Lemma}
@@ -16,8 +17,8 @@
 
 
 \begin{document}
-	\begin{lem}
-		\[\prod_{i=1}(1-x_i)=1+\sum_{R\subset Q}(-1)^{|R|}\prod_{x\in R}x\] where $Q=\mathcal{P}(x_1, x_2, \mathellipsis)$ 
+	\begin{lem}\label{alternating-sum-to-prod}
+		\[\prod_{i=1}(1-x_i)=\sum_{R\subset Q}(-1)^{|R|}\prod_{x\in R}x\] where $Q=\mathcal{P}(x_1, x_2, \mathellipsis)$ 
 	\end{lem}
 	\begin{proof}
 		Applying the distributive property on $\prod_{i=1}(1-x_i)$ two terms at a time will reveal a pattern we can use for the next step.\newline 
@@ -29,10 +30,10 @@
 		\end{align}
 	Then line \ref{partial_prod} can be expressed as \[\prod_{i=1}(1-x_i) = 1+(-1)\sum_{0<i}x_i+\sum_{0<i<j}x_ix_j+(-1)\sum_{0<i<j<k}x_ix_jx_k+\mathellipsis\]
 	
-	Now let $Q$ be the power set of our variables $x_1,x_2,\mathellipsis$, which is as follows:\newline $Q=\{\{x_1\},\{x_2\},\{x_3\},\{x_1,x_2\},\{x_1,x_3\},\{x_2,x_3\},\mathellipsis\}$
+	Now let $Q$ be the power set of our variables $x_1,x_2,\mathellipsis$, which is as follows:\newline $Q=\{\{\},\{x_1\},\{x_2\},\{x_3\},\{x_1,x_2\},\{x_1,x_3\},\{x_2,x_3\},\mathellipsis\}$
 	
 	Finally, we can express our previous sum as described in the lemma: 
-	\[\prod_{i=1}(1-x_i)=1+\sum_{R\subset Q}(-1)^{|R|}\prod_{x\in R}x\]   
+	\[\prod_{i=1}(1-x_i)=\sum_{R\subset Q}(-1)^{|R|}\prod_{x\in R}x\]   
 	\end{proof}
 
 	\begin{defn}
@@ -55,7 +56,7 @@
 	\begin{proof}
 		We can apply the previous lemma to show a relationship between the Mobius function and the inverse Riemann Zeta function.
 		
-		Applying the lemma, $\prod(1-p^{-s})=1+\sum_{R\subset Q}(-1)^{|R|}\prod_{x\in R}x$ where $R=\mathcal{P}(p_1,p_2,\mathellipsis,p_k)$
+		Applying the lemma, $\prod(1-p^{-s})=\sum_{R\subset Q}(-1)^{|R|}\prod_{x\in R}x$ where $Q=\mathcal{P}(p_1,p_2,\mathellipsis,p_k)$
 		\newline 
 		\newline
 		
@@ -276,4 +277,137 @@
 		\lim\limits_{n\to\infty} \frac{q(n)}{n^k} = \frac{1}{\zeta(rk)}
 	\end{align*}
 \end{note}
+\section{Next}
+\begin{note}
+	Fix $m>2,n\in \mathbb{Z}^+$.
+	For each $1\leq i \leq m$, $1\leq j\leq n$, randomly choose $r\in [1,N]$ to form a set of ordered pairs $(r_{ij})$.
+\end{note}
+
+\begin{defn}
+	Let $B$ be a fixed positive integer.
+	
+	A positive integer $x$ is B-friable (B-smooth) if and only if $x$ has no prime divisor greater than $B$.
+	
+	Equivalently:
+	A positive integer $x$ is B-Friable (B-smooth) if and only if none of its prime factors are greater than B. 
+\end{defn}
+
+We now want to count the number of $B$-friable random and independently chosen $(r_{ij})$ pairs. 
+\begin{defn}
+	Let $B$ be a fixed integer.
+	
+	Let $X_l=\{p_1,p_2,\mathellipsis,p_l\}$ be a subset of all primes larger than $B$. 
+	
+	Define $T(l,N)$ to be the number of ordered pairs $(r_{ij})$ such that $\gcd(\prod_{j=1}^nr_{1j},\mathellipsis,\prod_{j=1}^{n}r_{mj})$ is coprime to all $p\in X_l$.  
+\end{defn}
+
+\begin{thm}
+	content...
+\end{thm}
+\begin{proof}
+	\href{https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle#A_generalization}{Reference INC/EXC Generalization}\newline
+		
+	$T(l,N)=|\{(r_{ij}) : \gcd(\prod_{j=1}^nr_{1j},\mathellipsis,\prod_{j=1}^{n}r_{mj})  \text{ is coprime to }p\in X_l \}|$
+	
+	Using a generalized form of the inclusion exclsuion principle, we can count the nuber of ordered pairs that aren't in a subset containing elements that are not coprime to some $p\in X_l$.
+	
+	Then
+	$|\{(r_{ij}) :|\gcd(\prod_{j=1}^nr_{1j},\mathellipsis,\prod_{j=1}^{n}r_{mj}) \text{ is coprime to } p\in X_l\}| = \newline \sum_{P\subset X_l}{(-1)^{|P|}}|\{(r_{ij}:\prod_{p\in P} p\mid \gcd(\prod_{j=1}^nr_{1j},\mathellipsis,\prod_{j=1}^{n}r_{mj})\} = \sum_{P\subset X_l}{(-1)^{|P|}}|\{(r_{ij}:\prod_{p\in P} p\mid \prod_{j=1}^nr_{1j}\}|^m$
+	
+	Next, we need to apply the same inclusion exclusion principle form.
+	
+	$|\{(r_{ij}:\prod_{p\in P} p\mid \prod_{j=1}^nr_{1j}\}|^m=\sum_{q\subset P}(-1)^{|Q|}|\{(r_{1j}):p\nmid \prod_{j=1}^nr_{1j,\forall p\in Q}\}=\sum_{Q\subset P}(-1)^{|Q|}(\sum_{R\subset Q}(-1)^{|R|}\lfloor\frac{N}{\prod_{p\in R p}}\rfloor)^n$
+	
+	Finally, we have $T(l,N)=\sum_{P\subset X_l}{(-1)^{|P|}}(\sum_{Q\subset P}(-1)^{|Q|}(\sum_{R\subset Q}(-1)^{|R|}\lfloor\frac{N}{\prod_{p\in R p}}\rfloor)^n)^m$
+\end{proof}
+
+\begin{lem}
+	$\frac{1}{N} \lfloor \frac{N}{\prod_{p\in R p}}\rfloor = \frac{1}{\prod_{p\in P}p}+O(\frac{1}{N})$
+\end{lem}
+\begin{proof}
+	Similar to the previous problem:
+	\begin{align*}
+		0\leq \frac{N}{\prod_{p\in R p}}-\lfloor\frac{N}{\prod_{p\in R p}}\rfloor<1\\
+		\implies \frac{0}{N}\leq \frac{1}{\prod_{p\in R p}}-\frac{1}{N}\lfloor\frac{N}{\prod_{p\in R p}}\rfloor <\frac{1}{N}\\ 
+	\end{align*}
+	Thus, the error of substituting $\frac{1}{\prod_{p\in R p}}$ is at most $O(\frac{1}{N})$
+\end{proof}
+
+\begin{thm}
+	$\lim\limits_{N\to\infty}\frac{T(l,N)}{N^{nm}}=\prod_{i=1}^{l}(1-(1-(1-\frac{1}{p^i})^n)^m)$
+\end{thm}
+\begin{proof}
+	$\lim\limits_{N\to\infty}\frac{T(l,N)}{N^{nm}}=\lim\limits_{N\to\infty}\frac{1}{N^{nm}}\sum_{P\subset X_l}{(-1)^{|P|}}(\sum_{Q\subset P}(-1)^{|Q|}(\sum_{R\subset Q}(-1)^{|R|}\lfloor\frac{N}{\prod_{p\in R p}}\rfloor)^n)^m=\lim\limits_{N\to\infty}\sum_{P\subset X_l}{(-1)^{|P|}}(\sum_{Q\subset P}(-1)^{|Q|}(\sum_{R\subset Q}(-1)^{|R|}\frac{1}{\prod_{p\in R p}})^n)^m+O(\frac{1}{N^{nm}})$
+	
+	Using multiple applications of a lemma (\ref{alternating-sum-to-prod}):\begin{align*}
+	\lim\limits_{N\to\infty}\sum_{P\subset X_l}{(-1)^{|P|}}(\sum_{Q\subset P}(-1)^{|Q|}(\sum_{R\subset Q}(-1)^{|R|}\frac{1}{\prod_{p\in R p}})^n)^m+\lim\limits_{N\to\infty}O(\frac{1}{N^{nm}})=\\
+	\lim\limits_{N\to\infty} \prod_{i=1}^{l}(1-(1-(1-\frac{1}{p_i})^n)^m)+\lim\limits_{N\to\infty}O(\frac{1}{N^{mn}}) 
+	\end{align*}
+	
+	Taking the limit yields the hypothesis.
+\end{proof}
+This gives the probability that the gcd of products of integers is not divisible by the first $l$ primes greater than $B$.
+
+Now we want to find the same probability, this time for an infinite number (all) of primes greater than $B$, thus giving the probability that the GCD is $B$-Friable. 
+
+However, do we take $l\to \inf$ before or after $n\to\infty$? Or does order not matter? The final algebra suggests that only the error depends on $N$, so we don't have to worry about it? TODO: Ask professor.
+
+\begin{thm}
+	$\lim\limits_{l\to\infty}\lim\limits_{N\to\infty}\frac{T(l,N)}{N^{nm}}=\prod_{i=1}^{l}(1-(1-(1-\frac{1}{p^i})^n)^m)$
+\end{thm}
+
+Now we want to find upper and lower bounds. 
+
+\begin{thm}
+	Let $\hat{n}=\max\{n,B\}$, $r=\lfloor n^{\frac{m}{m-1}}+1\rfloor$, and $\hat{r}=\max\{\hat{n},r\}$.
+	
+	Then the probability that $\gcd(\prod_{j=1}^n r_{1j},\mathellipsis,\prod_{j=1}^{n}r_{mj})$ is $B$-friable is bounded by $\frac{1}{\zeta(m)}\prod_{p\leq B}(1-\frac{1}{p^m})^{-1}$ and is lower bounded by $\prod_{B<p\leq\hat{n}}[1-\{1-(1-\frac{1}{p})^n\}^m]\prod_{\hat{n}<p\leq\hat{r}}\{{1-(\frac{n}{p}^m)}\}\frac{1}{\zeta(s)}$. Where the first product term is equal to 1 if $B=\hat{n}$, and the second product term is equal to 1 if $\hat{n}=\hat{r}$.
+	\end{thm} 
+	\begin{proof}
+		$(1-\frac{1}{p})^n$ decreases as $n$ increases so  $\prod_{p>B}[1-\{1-(1-\frac{1}{p})^n\}^m]$ decreases as $n$ increases. This gives us the inequality $\prod_{B<p\leq\hat{n}}[1-\{1-(1-\frac{1}{p})^n\}^m] \leq \prod_{p>B}(1-\frac{1}{p^m})=\frac{1}{\zeta(m)}\prod_{p\leq B}(1-\frac{1}{p^m})^{-1}$.
+		
+		Where the rightmost equality is derived using the Riemann Zeta function definition. Thus we have found  the upper bound.
+		
+		Next, using Bernoulli's inequality, $(1-\frac{n}{p})^n \leq 1- \frac{n}{p}$. If $p>n$, then the entire expression is less than 1. Thus if we set $p>\max\{n,B\}=\hat{n}$ we can always satisfy this condition. 
+		
+		Thus we have $\prod_{B<p\leq\hat{n}}[1-\{1-(1-\frac{1}{p})^n\}^m] \geq\prod_{B<p\leq \hat{n}}[1-\{1-(1-\frac{1}{p})^n\}^m]\cdot\prod_{p>\hat{n}}\{1-(\frac{n}{p})^m\}$ 
+		
+		STUFF FROM SCRATCH PAD
+		
+		Next, $\prod_{\hat{n}<p\leq\hat{r}}\{1-\frac{n}{p}^m\} < 1$ since $p>n$ and $\prod_{p>\hat{r}}(1-\frac{1}{p^s})<1$. 
+		
+		Thus, 
+	 $\prod_{B<p\leq\hat{n}}[1-\{1-(1-\frac{1}{p})^n\}^m] \geq\prod_{B<p\leq \hat{n}}[1-\{1-(1-\frac{1}{p})^n\}^m]\cdot\prod_{p>\hat{n}}\{1-(\frac{n}{p})^m\}\cdot\prod_{p>\hat{r}}(1-\frac{1}{p^s})>\prod_{p>\hat{n}}\{1-(\frac{n}{p})^m\}\cdot\prod_{p>\hat{r}}\frac{1}{\zeta(s)}$, which covers all cases for $p>B$. 
+	 
+	 TODO Scratch pad 
+	 
+	\end{proof}
+	\subsection{Scratchpad}
+	"We can easily check that $\frac{n^m}{p^m}\leq \frac{1}{p^s}$" 
+	
+	Can't seem to figure it out.
+	Not even sure why this is needed.
+
+	How do I derive $s$?
+	Solving with logs gets close, but can't deal with the denominator.
+
+	\begin{thm}
+		Let $s=m(1-\log_{\hat{r}}n)$. Then, $s>1$ whenever $0\leq n\leq\hat{r}=\max\{n,B,r\}$. 
+	\end{thm}
+	\begin{proof}
+		$\log_{\hat{r}}n<1$ whenever $0\leq n\leq\hat{r}=\max\{n,B,r\}$.
+		and for positive integer $m\geq 2$,
+		then $m(1-\log_{\hat{r}}n)>1$. 
+	\end{proof}
+
+	\begin{thm}
+		$\hat{r}\geq r > n^{{\frac{m}{m-1}}}$
+	\end{thm}
+	\begin{proof}
+		Let $r=\lfloor n^{\frac{m}{m-1}}+1\rfloor$
+		Then using the definition of floor, $r\geq n^{\frac{m}{m-1}}\geq r-1$
+		
+		Next, $\max\{n,B,r\} = \hat{r} \geq r \geq n^{\frac{m}{m-1}}\geq r-1$. 
+	\end{proof}
+
 \end{document}
