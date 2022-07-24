@@ -379,7 +379,11 @@ Now we want to find upper and lower bounds.
 		Thus, 
 	 $\prod_{B<p\leq\hat{n}}[1-\{1-(1-\frac{1}{p})^n\}^m] \geq\prod_{B<p\leq \hat{n}}[1-\{1-(1-\frac{1}{p})^n\}^m]\cdot\prod_{p>\hat{n}}\{1-(\frac{n}{p})^m\}\cdot\prod_{p>\hat{r}}(1-\frac{1}{p^s})>\prod_{p>\hat{n}}\{1-(\frac{n}{p})^m\}\cdot\prod_{p>\hat{r}}\frac{1}{\zeta(s)}$, which covers all cases for $p>B$. 
 	 
-	 TODO Scratch pad 
+	 TODO Scratch pad
+	 
+	 \begin{thm}
+	 	Remark 2.4 here, blocked by derivation of $s$
+	 \end{thm} 
 	 
 	\end{proof}
 	\subsection{Scratchpad}
@@ -410,4 +414,38 @@ Now we want to find upper and lower bounds.
 		Next, $\max\{n,B,r\} = \hat{r} \geq r \geq n^{\frac{m}{m-1}}\geq r-1$. 
 	\end{proof}
 
+
+	\section{Generalization to $k$-gcd}
+	
+	\begin{defn}
+		Let $\gcd_k(x_1,x_2,\mathellipsis,x_n)$ be the largest integer whose $k-th$ power divides $x_1, x_2,\mathellipsis, x_n$.
+		
+		When $k=1,\gcd_k(x_1,x_2,\mathellipsis,x_n)=\gcd(x_1,x_2,\mathellipsis,x_n)$
+		
+		When $\gcd_k(x_1,x_2,\mathellipsis,x_n)=1$ we say that $ x_1,x_2,\mathellipsis,x_n$ are relatively $k$-prime.
+	\end{defn}
+	Example: 
+	$\gcd_1(128,192,1280)=64$
+	$\gcd_2(128,192,1280)=8$
+	$\gcd_3(128,192,1280)=4$
+	$\gcd_4(128,192,1280)=2$
+	$\gcd_5(128,192,1280)=2$
+	$\gcd_6(128,192,1280)=1$
+	$\gcd_7(128,192,1280)=2$
+
+	\begin{thm}
+		$\prod_{p\in P} \mid \gcd_k(\prod_{j=1}^{n}r_{1j},\mathellipsis,\prod_{j=1}^n r_{mj})$ if and only if $\prod_{p\in P} p^k \mid \prod_{j}r_{ij}$ for any $i$.
+	\end{thm}
+
+	\begin{proof}
+		 
+	\end{proof}
+
+	\begin{thm}
+		$\lim\limits_{N\to\infty} \frac{T_k(l,n)}{N^{mn}}=\prod_{i=1}^l[1-\{1-(\frac{1}{p_i})^n(1+\frac{nH_1}{p_i})+\mathellipsis+\frac{nH_{k-1}}{p_i^{k-1}})\}]$
+	\end{thm}
+
+	\begin{proof}
+		
+	\end{proof}
 \end{document}
