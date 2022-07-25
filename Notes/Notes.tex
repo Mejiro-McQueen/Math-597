@@ -17,6 +17,7 @@
 
 
 \begin{document}
+	\section{Useful lemmas and notes from relatively $r$-prime }
 	\begin{lem}\label{alternating-sum-to-prod}
 		\[\prod_{i=1}(1-x_i)=\sum_{R\subset Q}(-1)^{|R|}\prod_{x\in R}x\] where $Q=\mathcal{P}(x_1, x_2, \mathellipsis)$ 
 	\end{lem}
@@ -117,15 +118,6 @@
 \end{note}
 
 \begin{note}
-	Recall Kolmogrov Probability Axioms:
-	\begin{enumerate}
-		\item $P(A)\geq 0$\\
-		\item $P(A_1\cup A_2 \cup \mathellipsis)=P(A_1)+P(A_2)+\mathellipsis$ where $A_i$ are disjoint events.\\
-		\item $P(S)=1$
-	\end{enumerate}
-\end{note}
-
-\begin{note}
 	How many positive integers less than $n$ are divisible by $m$? 
 	
 	First, we will observe the following pattern and build upon it: 
@@ -188,7 +180,9 @@
 	
 	Thus, by the inclusion exclusion principle:
 	
-	$q(n) = n^k-\sum_{p^1}\lfloor \frac{n}{p_1^r}\rfloor^k + \sum_{(p_1 < p_2)}\lfloor \frac{n}{(p_1 p_2)^r}\rfloor^k - \sum_{(p_1 < p_2 < p_3)}\lfloor \frac{n}{(p_1 p_2 p_3)^r}\rfloor^k +\mathellipsis$ 
+	$q(n) = n^k-\sum_{p^1}\lfloor \frac{n}{p_1^r}\rfloor^k + \sum_{(p_1 < p_2)}\lfloor \frac{n}{(p_1 p_2)^r}\rfloor^k - \sum_{(p_1 < p_2 < p_3)}\lfloor \frac{n}{(p_1 p_2 p_3)^r}\rfloor^k +\mathellipsis$
+	
+	TODO: There might be a way to compact this. 
 \end{note}
 
 \begin{note}
@@ -277,7 +271,7 @@
 		\lim\limits_{n\to\infty} \frac{q(n)}{n^k} = \frac{1}{\zeta(rk)}
 	\end{align*}
 \end{note}
-\section{Next}
+\section{B-Friable}
 \begin{note}
 	Fix $m>2,n\in \mathbb{Z}^+$.
 	For each $1\leq i \leq m$, $1\leq j\leq n$, randomly choose $r\in [1,N]$ to form a set of ordered pairs $(r_{ij})$.
@@ -309,7 +303,7 @@ We now want to count the number of $B$-friable random and independently chosen $
 		
 	$T(l,N)=|\{(r_{ij}) : \gcd(\prod_{j=1}^nr_{1j},\mathellipsis,\prod_{j=1}^{n}r_{mj})  \text{ is coprime to }p\in X_l \}|$
 	
-	Using a generalized form of the inclusion exclsuion principle, we can count the nuber of ordered pairs that aren't in a subset containing elements that are not coprime to some $p\in X_l$.
+	Using a generalized form of the inclusion exclsuion principle, we can count the nuber of ordered pairs that are not in a subset containing elements that are not coprime to some $p\in X_l$.
 	
 	Then
 	$|\{(r_{ij}) :|\gcd(\prod_{j=1}^nr_{1j},\mathellipsis,\prod_{j=1}^{n}r_{mj}) \text{ is coprime to } p\in X_l\}| = \newline \sum_{P\subset X_l}{(-1)^{|P|}}|\{(r_{ij}:\prod_{p\in P} p\mid \gcd(\prod_{j=1}^nr_{1j},\mathellipsis,\prod_{j=1}^{n}r_{mj})\} = \sum_{P\subset X_l}{(-1)^{|P|}}|\{(r_{ij}:\prod_{p\in P} p\mid \prod_{j=1}^nr_{1j}\}|^m$
@@ -372,14 +366,12 @@ Now we want to find upper and lower bounds.
 		
 		Thus we have $\prod_{B<p\leq\hat{n}}[1-\{1-(1-\frac{1}{p})^n\}^m] \geq\prod_{B<p\leq \hat{n}}[1-\{1-(1-\frac{1}{p})^n\}^m]\cdot\prod_{p>\hat{n}}\{1-(\frac{n}{p})^m\}$ 
 		
-		STUFF FROM SCRATCH PAD
+		TODO: STUFF FROM SCRATCH PAD
 		
 		Next, $\prod_{\hat{n}<p\leq\hat{r}}\{1-\frac{n}{p}^m\} < 1$ since $p>n$ and $\prod_{p>\hat{r}}(1-\frac{1}{p^s})<1$. 
 		
 		Thus, 
 	 $\prod_{B<p\leq\hat{n}}[1-\{1-(1-\frac{1}{p})^n\}^m] \geq\prod_{B<p\leq \hat{n}}[1-\{1-(1-\frac{1}{p})^n\}^m]\cdot\prod_{p>\hat{n}}\{1-(\frac{n}{p})^m\}\cdot\prod_{p>\hat{r}}(1-\frac{1}{p^s})>\prod_{p>\hat{n}}\{1-(\frac{n}{p})^m\}\cdot\prod_{p>\hat{r}}\frac{1}{\zeta(s)}$, which covers all cases for $p>B$. 
-	 
-	 TODO Scratch pad
 	 
 	 \begin{thm}
 	 	Remark 2.4 here, blocked by derivation of $s$
@@ -418,35 +410,80 @@ Now we want to find upper and lower bounds.
 	\section{Generalization to $k$-gcd}
 	
 	\begin{defn}
-		Let $\gcd_k(x_1,x_2,\mathellipsis,x_n)$ be the largest integer whose $k-th$ power divides $x_1, x_2,\mathellipsis, x_n$.
+		Let $\gcd_k(x_1,x_2,\mathellipsis,x_n)$ be the largest integer whose $k^{th}$ power divides $x_1, x_2,\mathellipsis, x_n$.
 		
 		When $k=1,\gcd_k(x_1,x_2,\mathellipsis,x_n)=\gcd(x_1,x_2,\mathellipsis,x_n)$
 		
 		When $\gcd_k(x_1,x_2,\mathellipsis,x_n)=1$ we say that $ x_1,x_2,\mathellipsis,x_n$ are relatively $k$-prime.
 	\end{defn}
 	Example: 
-	$\gcd_1(128,192,1280)=64$
-	$\gcd_2(128,192,1280)=8$
-	$\gcd_3(128,192,1280)=4$
-	$\gcd_4(128,192,1280)=2$
-	$\gcd_5(128,192,1280)=2$
-	$\gcd_6(128,192,1280)=2$
-	$\gcd_7(128,192,1280)=2$
-	$\gcd_7(128,192,1280)=1$
+	\begin{align*}
+		\gcd{_1}(128,192,1280)&=64\\
+		\gcd{_2}(128,192,1280)&=8\\
+		\gcd{_3}(128,192,1280)&=4\\
+		\gcd{_4}(128,192,1280)&=2\\
+		\gcd{_5}(128,192,1280)&=2\\
+		\gcd{_6}(128,192,1280)&=2\\
+		\gcd{_7}(128,192,1280)&=2\\
+		\gcd{_8}(128,192,1280)&=1\\
+	\end{align*}
+	
 
 	\begin{thm}
 		$\prod_{p\in P} \mid \gcd_k(\prod_{j=1}^{n}r_{1j},\mathellipsis,\prod_{j=1}^n r_{mj})$ if and only if $\prod_{p\in P} p^k \mid \prod_{j}r_{ij}$ for any $i$.
 	\end{thm}
 
 	\begin{proof}
+		 Suppose $\prod_{p\in P} \mid \gcd_k(\prod_{j=1}^{n}r_{1j},\mathellipsis,\prod_{j=1}^n r_{mj})=a$.
 		 
+		 Then. $p|a \iff p^k|a^k \iff p^k | \prod_j r_{ij}$ for some $i$. 
 	\end{proof}
 
 	\begin{thm}
+		Let $p_1, p_2,\mathellipsis$ be the prime numbers larger than $B$ in increasing order. 
+		
 		$\lim\limits_{N\to\infty} \frac{T_k(l,n)}{N^{mn}}=\prod_{i=1}^l[1-\{1-(\frac{1}{p_i})^n(1+\frac{nH_1}{p_i})+\mathellipsis+\frac{nH_{k-1}}{p_i^{k-1}})\}]$
 	\end{thm}
 
 	\begin{proof}
-		
+		  Let $X_l=\{p_1,\mathellipsis,p_l\}$ and $1\leq r_{ij}\leq N$
+		  
+		  Using the inclusion exclusion theorem, $\frac{T_k(l,n)}{N^{nm}}=\sum_{P\subset X_l}(-1)^{|P|}(\sum_{Q\subset P}\Pr[p^k\nmid \prod_{j=1}^{n}r_{1j} \; \forall p\in Q ])^m$
+		  
+		  Let $p^a \mid\mid x$ denote $p^a\mid x$ and $p^{a+1}\nmid x$ and let $a_p,j\in Q$ and $1\leq j \leq n$.
+		  
+		  Using a result from combinatorics: 
+		  \url{https://en.wikipedia.org/wiki/Stars_and_bars_(combinatorics)}
+		  \url{https://en.wikipedia.org/wiki/Composition_(combinatorics)}
+		  
+		  The number of $n$-tuples of positive integers which satisfy $a_{p,1}+\mathellipsis+a_{p,n}=i$ is given by $_nH_i = (\binom{n+i-1}{i})$
+		  
+		  Regarding $||$, suppose a tuple satisfies $a_{p,1}+\mathellipsis+a_{p,n}<k$ with $a_{p,1}+\mathellipsis+a_{p,n}+1=k$, then $||$ guarantees $p^k \nmid x$. 
+		  
+		  We will use these two concepts to count every composition $a_{p,1}+\mathellipsis+a_{p,n}<k$ for $p^{a_{p,j}}$ that divides the quantity.
+		  
+		  Thus $\Pr[p^k\nmid \prod_{j=1}^{n}r_{1j}\:\forall p\in Q] = \sum_{a_{p,1}+\mathellipsis+a_{p,n}<l}\Pr[p^{a_{p,j}} \mid\mid r_{1j} \forall p,j]=\sum_{a_{p,1}+\mathellipsis+a_{p,n}<k}\prod_{j=1}^{n}\Pr[p^{a_{p,j}} \mid\mid r_{1j} \forall p\in Q]$, where the last term utilizes the product rule for probability. This allows us to count the innermost quantity. 
+		  
+		  Using the first form of the inclusion exclusion principle discussed earlier, $|\{(r_{1j}): p^{a_{{p,j}}}\mid\mid r_{1j} \: \forall p\in Q\}| = \lfloor\frac{N}{\prod_{p\in Q}p^{a_{p,j}}}\rfloor-\sum_{p\in Q}\lfloor \frac{N}{q\prod_{p\in Q}p^{a_{p,j}}}\rfloor+\mathellipsis+(-1)^{|Q|}\lfloor\frac{N}{\prod_{p\in Q}p^{a_{p,j}+1}}\rfloor$
+		  
+		  Next, we form an estimate of the quantity by taking the difference of the last two terms. 
+		  
+		  $\lfloor \frac{N}{\prod {p\in Q} p^{a_{p,j}}} \rfloor - \lfloor \frac{N}{\prod {p\in Q} p^{a_{p,j}+1}} \rfloor =  \frac{N}{\prod {p\in Q} p^{a_{p,j}}} + O(1) -  \frac{N}{\prod {p\in Q} p^{a_{p,j}+1}} + O(1) = N\prod_ {p\in Q}[ \frac{1}{ p^{a_{p,j}}}  -  \frac{1}{ p^{a_{p,j}+1}} ]+ \frac{2}{N}O(1)=N\prod_ {p\in Q}[ \frac{1}{ p^{a_{p,j}}}  -  \frac{1}{ p^{a_{p,j}+1}} ]+ O(1)$ 
+		  
+		  Thus we have $\Pr[p^k\nmid \prod_{j=1}^{n}r_{1j}\:\forall p\in Q] = \prod_{p\in Q} (\sum_{a_{p,1}+\mathellipsis+a_{p,n}<k}\prod_{j=1}^{n}\frac{p-1}{p^{a_{p,j}+1}})+O(\frac{1}{N}) = \prod_{p\in Q}[(1-\frac{1}{p})^n\sum_{a_{p,1}+\mathellipsis+a_{p,n}<k}\frac{1}{p^{a_{p,1}+\mathellipsis+a_{p,n}}}]+O(\frac{1}{N})$
+		  
+		  Finally, invoking an earlier result,  $\prod_{p\in Q}[(1-\frac{1}{p})^n\sum_{a_{p,1}+\mathellipsis+a_{p,n}<k}\frac{1}{p^{a_{p,1}+\mathellipsis+a_{p,n}}}]+O(\frac{1}{N})= \prod_{p\in Q}[(1-\frac{1}{p})^n(1+\frac{_nH_1}{p}+\mathellipsis+\frac{_nH_{k-1}}{p^{k-1}})]+O(\frac{1}{N})$
+		  
+		  Finally, substitute these results into the original expression and repeatedly apply (\ref{alternating-sum-to-prod}): to simplify as in an eariler result (TODO: ref), and let $N\to \infty$, and the error approaches 0. 
 	\end{proof}
+
+	\begin{proof}
+		TODO: Still not convinced you need LDCT. Better ask professor about it. 
+	\end{proof}
+
+	TODO: What to do with last page? Not a lot of room for proofs, and the $s$ that I couldn't prove is invoked again.
+	\section{Ideas?}
+	\url{https://en.wikipedia.org/wiki/Smooth_number}
+	
+	What if I try to generalize for powersmooth / Ultrafriable? Maybe some other concept of smooth/rough?
 \end{document}
